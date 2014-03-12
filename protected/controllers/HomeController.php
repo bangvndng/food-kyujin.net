@@ -53,11 +53,17 @@ class HomeController extends Controller
 			Yii::app()->clientScript->registerMetaTag($model->description, null, null, array('property' => 'og:description'));
 
 		Yii::app()->clientScript->registerMetaTag($model->app->fb_app_id, null, null, array('property' => 'fb:app_id'));
+		
 		if (!empty($model->image)) {
 			$img = Yii::app()->controller->createAbsoluteUrl("/") .  ImageHelper::thumb(600,450,'/uploads/' .$model->image);
 	    	$img = str_replace('/index.php', '', $img);
 			Yii::app()->clientScript->registerMetaTag($img, null, null, array('property' => 'og:image'));
 		}
+
+		$page_model = Pages::model()->findAll();
+
+		print_r($page_model);
+		die;
 
 		$this->render('question' , array('model' => $model));
 	}
@@ -65,6 +71,7 @@ class HomeController extends Controller
 	public function actionAnswer($id = null, $share = 1)
 	{
 		$model=Questions::model()->findByPk($id);
+
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
 
@@ -75,6 +82,7 @@ class HomeController extends Controller
 		}
 
 		$recommended = $model->getRecommended($model->id);
+
 
 
 		$this->render('answer', array('model' => $model, 'share' => $share, 'recommended' => $recommended));

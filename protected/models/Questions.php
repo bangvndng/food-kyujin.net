@@ -63,7 +63,7 @@ class Questions extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'answers' => array(self::HAS_MANY, 'Answers', 'question_id'),
-			'app' => array(self::BELONGS_TO, 'Apps', 'app_id'),
+			'app' => array(self::BELONGS_TO, 'Apps', 'app_id')
 		);
 	}
 
@@ -161,10 +161,10 @@ class Questions extends CActiveRecord
 
 				$user_profile = $facebook->api('/me?locale=ja_JP','GET');
 
-		         if (!$this->app_type)
-		         {
-		         	$message .= "[USER]さんの結果はこちらです。\r\n\r\n-----------------------------------------\r\n" . $this->currentResult . "\r\n-----------------------------------------\r\n\r\nみんなも遊んでみてね☆\r\n [URL]" ; 
-		         }
+				if (!$this->app_type)
+				{
+					$message .= "[USER]さんの結果はこちらです。\r\n\r\n-----------------------------------------\r\n" . $this->currentResult . "\r\n-----------------------------------------\r\n\r\nみんなも遊んでみてね☆\r\n [URL]" ; 
+				}
 
 		        $message = str_replace('[USER]', $user_profile['name'], $message);
 				$message = str_replace('[TITLE]', $this->title, $message);
@@ -219,21 +219,21 @@ class Questions extends CActiveRecord
 		$fid = $facebook->getUser();
 		if ($fid) {
 
-		  // Check current FB has in DB
-		 // $exists = FacebookUsers::model()->exists('facebook_id = :fid and app_id = :app_id and question_id = :question_id',array(':fid' => $fid, ':app_id' => $this->app->fb_app_id , ':question_id' => $this->id));
+			// Check current FB has in DB
+			// $exists = FacebookUsers::model()->exists('facebook_id = :fid and app_id = :app_id and question_id = :question_id',array(':fid' => $fid, ':app_id' => $this->app->fb_app_id , ':question_id' => $this->id));
 
-		 // if (! $exists) {
-		 // 	return $isOk;
-		 // }
+			// if (! $exists) {
+			// 	return $isOk;
+			// }
 
-		 // Check has full permision for this question
-		  try {
-		  	$permissionsFb = $facebook->api('/me/permissions/');
-		  	$checkArr = explode(',', $this->permissions);
-		  	foreach ($checkArr as $key => $item) {
-		  		if (!array_key_exists($item, $permissionsFb['data'][0])) {
-		  			return false;
-		  		}
+			// Check has full permision for this question
+		  	try {
+			  	$permissionsFb = $facebook->api('/me/permissions/');
+			  	$checkArr = explode(',', $this->permissions);
+			  	foreach ($checkArr as $key => $item) {
+			  		if (!array_key_exists($item, $permissionsFb['data'][0])) {
+			  			return false;
+			  		}
 		  	}
 
 		  	// Check User have been like page

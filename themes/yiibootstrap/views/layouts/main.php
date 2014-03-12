@@ -20,6 +20,7 @@
             'class'=>'bootstrap.widgets.TbMenu',
             'items'=>array(
                 array('label'=>'Apps', 'url'=>array('/apps/admin')),
+                array('label'=>'Pages', 'url'=>array('/pages/admin')),
                 array('label'=>'Questions', 'url'=>array('/questions/admin')),
                 array('label'=>'Facebook Users', 'url'=>array('/facebookUsers/admin')),
                 array('label'=>'Users', 'url'=>array('/user/admin')),
