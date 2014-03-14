@@ -1,8 +1,8 @@
 <div id="fb-root"></div>
 <?php
-
     $answer = $model;
     $apps = $model->app;
+
  ?>
 <div id="container" class="container" >
 

@@ -60,12 +60,21 @@ class HomeController extends Controller
 			Yii::app()->clientScript->registerMetaTag($img, null, null, array('property' => 'og:image'));
 		}
 
-		$page_model = Pages::model()->findAll();
+		$pages_model = Pages::model()->findAll();
 
-		print_r($page_model);
-		die;
+		$pages_model_results = array();
+		foreach ($pages_model as $key => $page_model) {
+			# code...
+			$pages_model_result = array(
+				'id' 			=> $page_model->id,
+				'fb_page_id' 	=> $page_model->fb_page_id,
+				'fb_page_name' 	=> $page_model->fb_page_name,
+				'fb_page_url' 	=> $page_model->fb_page_url,
+			);
+			$pages_model_results[] = $pages_model_result;
+		}
 
-		$this->render('question' , array('model' => $model));
+		$this->render('question' , array('model' => $model, 'pages_model' => json_encode($pages_model_results)));
 	}
 
 	public function actionAnswer($id = null, $share = 1)
