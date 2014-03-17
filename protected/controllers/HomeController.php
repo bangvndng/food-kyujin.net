@@ -60,7 +60,7 @@ class HomeController extends Controller
 			Yii::app()->clientScript->registerMetaTag($img, null, null, array('property' => 'og:image'));
 		}
 
-		$pages_model = Pages::model()->findAll();
+		$pages_model = $model->pages;
 
 		$pages_model_results = array();
 		foreach ($pages_model as $key => $page_model) {

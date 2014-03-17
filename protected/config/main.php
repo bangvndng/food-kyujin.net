@@ -20,6 +20,7 @@ return array(
 		'application.components.helpers.*',
 		'application.modules.user.models.*',
         'application.modules.user.components.*',
+        'application.extensions.CAdvancedArBehavior'
         // 'ext.ExtendedClientScript.jsmin.JSMin',
 
 	),

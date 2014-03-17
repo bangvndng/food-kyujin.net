@@ -50,6 +50,12 @@ class QuestionsController extends Controller
 	 */
 	public function actionView($id)
 	{
+		$attributes = $this->loadModel($id)->attributes;
+
+		$question = Questions::model()->findByPk($id);
+		
+		$pages = $question->pages;
+
 		Yii::app()->theme = 'yiibootstrap';
 		$this->render('view',array(
 			'model'=>$this->loadModel($id),
@@ -66,6 +72,7 @@ class QuestionsController extends Controller
 		$model=new Questions;
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
+		$pages = $model->pages;
 
 		if(isset($_POST['Questions']))
 		{
@@ -75,6 +82,8 @@ class QuestionsController extends Controller
 			}
 
 			$model->image=CUploadedFile::getInstance($model,'image');
+
+			$model->pages = $_POST['Questions']['pagesIds'];
 
 			if($model->save())
 			{
@@ -100,6 +109,8 @@ class QuestionsController extends Controller
 		Yii::app()->theme = 'yiibootstrap';
 		$model=$this->loadModel($id);
 
+		$pages = $model->pages;
+
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 		$model->permissions = explode(',', $model->permissions);
@@ -121,6 +132,8 @@ class QuestionsController extends Controller
 				$model->permissions = implode(',', $model->permissions);
 			}
 
+			$model->pages = $_POST['Questions']['pagesIds'];
+
 			if($model->save())
 			{
 
@@ -133,6 +146,7 @@ class QuestionsController extends Controller
 
 		$this->render('update',array(
 			'model'=>$model,
+			'pages'=>$pages,
 		));
 	}
 

@@ -80,6 +80,8 @@
 
 	<?php echo $form->textFieldRow($model,'fb_page_title',array('class'=>'span5','maxlength'=>255)); ?>
 
+	<?php echo $form->checkBoxListRow($model,'pagesIds', CHtml::listData(Pages::model()->findAll(), 'id', 'fb_page_name'));?>
+
 	<div class="form-actions">
 		<?php $this->widget('bootstrap.widgets.TbButton', array(
 			'buttonType'=>'submit',

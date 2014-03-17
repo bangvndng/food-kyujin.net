@@ -33,6 +33,30 @@ class Questions extends CActiveRecord
 		return 'questions';
 	}
 
+	private $_pagesIds;
+
+	public function getPagesIds()
+	{
+	    if (!isset($this->_pagesIds))
+	    {
+	        $this->_pagesIds = array();
+	        foreach ($this->pages as $page)
+	            $this->_pagesIds[] = $page->id;
+	    }
+
+	    return $this->_pagesIds;
+	}
+
+	public function setTagsIds($pagesIds)
+	{
+	    $this->_pagesIds = $pagesIds;
+	}
+
+	public function behaviors(){
+		return array( 'CAdvancedArBehavior' => array(
+		'class' => 'application.extensions.CAdvancedArBehavior'));
+	}
+
 	/**
 	 * @return array validation rules for model attributes.
 	 */
@@ -63,7 +87,8 @@ class Questions extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'answers' => array(self::HAS_MANY, 'Answers', 'question_id'),
-			'app' => array(self::BELONGS_TO, 'Apps', 'app_id')
+			'app' => array(self::BELONGS_TO, 'Apps', 'app_id'),
+			'pages'=>array(self::MANY_MANY, 'Pages','questions_pages(question_id, page_id)',),
 		);
 	}
 

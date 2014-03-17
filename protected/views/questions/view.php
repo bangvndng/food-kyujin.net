@@ -32,7 +32,17 @@ $this->menu=array(
 		'count',
 		'count_today',
 		'count_month',
-		'fb_page_id',
-		'fb_page_url',
+		// 'fb_page_id',
+		// 'fb_page_url',
 	),
 )); ?>
+<?php 
+$form=$this->beginWidget('bootstrap.widgets.TbActiveForm',array(
+	'id'=>'questions-form',
+	'enableAjaxValidation'=>false,
+    'htmlOptions' => array('enctype' => 'multipart/form-data'),
+
+)); 
+?>
+<?php echo $form->checkBoxListRow($model,'pagesIds', CHtml::listData(Pages::model()->findAll(), 'id', 'fb_page_name'));?>
+<?php $this->endWidget(); ?>

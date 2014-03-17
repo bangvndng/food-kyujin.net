@@ -40,16 +40,16 @@ class Pages extends CActiveRecord
 	/**
 	 * @return array relational rules.
 	 */
-	/*
+	
 	public function relations()
 	{
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'questions' => array(self::HAS_MANY, 'Questions', 'app_id'),
+			'questions'=>array(self::MANY_MANY, 'Questions','questions_pages(page_id, question_id)',),
 		);
 	}
-	*/
+	
 
 	/**
 	 * @return array customized attribute labels (name=>label)
