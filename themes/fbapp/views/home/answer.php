@@ -65,7 +65,11 @@ else
                     message: url
                 }
 
+                FB.api('/me/feed', 'post', feed, function(res){
+                    $("#view_answer_result").show();
+                }); 
                 
+                /*                
                 var fql_query = 'SELECT permalink,action_links FROM stream WHERE source_id = me() and message ="'+url+'"';
                 FB.api({
                     method: 'fql.query',
@@ -81,6 +85,7 @@ else
                         }); 
                     }
                 }); 
+                */  
             }
         });
 
